@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('./src/models/index'); // Carga modelos y sincroniza tablas
 const express = require('express');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
