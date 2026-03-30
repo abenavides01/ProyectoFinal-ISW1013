@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
+const { sessionTimeout } = require('./src/middlewares/sessionTimeout');
 const sequelize = require('./src/config/database');
 require('./src/models/index');
 
@@ -21,6 +22,9 @@ app.use(express.static('public'));
 
 // Rutas
 app.use('/api', require('./src/routes/index'));
+
+// Middleware de timeout de sesión
+app.use(sessionTimeout);
 
 // Iniciar servidor
 app.listen(PORT, () => {
