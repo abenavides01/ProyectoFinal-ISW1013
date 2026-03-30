@@ -1,14 +1,14 @@
 require('dotenv').config();
-require('./src/models/index'); // Carga modelos y sincroniza tablas
 const express = require('express');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
+const sequelize = require('./src/config/database');
+require('./src/models/index');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const sequelize = require('./src/config/database');
 
-// Seguridad: headers HTTP automáticos (cubre RS-06 completo)
+// Seguridad
 app.use(helmet());
 
 // Parseo de JSON y cookies
@@ -16,10 +16,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// Ruta de prueba
-app.get('/', (req, res) => {
-  res.json({ mensaje: 'Servidor funcionando correctamente' });
-});
+// Archivos estáticos
+app.use(express.static('public'));
+
+// Rutas
+app.use('/api', require('./src/routes/index'));
 
 // Iniciar servidor
 app.listen(PORT, () => {
