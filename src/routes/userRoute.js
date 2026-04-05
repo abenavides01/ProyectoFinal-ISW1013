@@ -3,6 +3,7 @@ const router = express.Router();
 
 const { verificarToken } = require('../middlewares/auth');
 const { verificarRol } = require('../middlewares/roles');
+const { csrfProtection } = require('../middlewares/csrfProtection');
 const {
   obtenerUsuarios,
   obtenerUsuarioPorId,
@@ -28,6 +29,7 @@ router.get(
 router.post(
   '/',
   verificarToken,
+  csrfProtection,
   verificarRol('SuperAdmin'),
   crearUsuario
 );
@@ -35,6 +37,7 @@ router.post(
 router.put(
   '/:id',
   verificarToken,
+  csrfProtection,
   verificarRol('SuperAdmin'),
   actualizarUsuario
 );
@@ -42,6 +45,7 @@ router.put(
 router.delete(
   '/:id',
   verificarToken,
+  csrfProtection,
   verificarRol('SuperAdmin'),
   eliminarUsuario
 );

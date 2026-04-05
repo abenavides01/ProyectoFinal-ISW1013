@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
+
 const { registro, login, logout } = require('../controllers/authController');
 const { verificarToken } = require('../middlewares/auth');
-const {loginLimiter} = require('../middlewares/rateLimiter');
+const { loginLimiter } = require('../middlewares/rateLimiter');
+const { csrfProtection } = require('../middlewares/csrfProtection');
 
-//rutas de autenticación
-router.post('/registro', registro);
-router.post('/login', loginLimiter, login);
-router.post('/logout', verificarToken, logout);
+router.post('/registro', csrfProtection, registro);
+router.post('/login', csrfProtection, loginLimiter, login);
+router.post('/logout', verificarToken, csrfProtection, logout);
 
 module.exports = router;

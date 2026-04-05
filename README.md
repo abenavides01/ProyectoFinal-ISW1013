@@ -71,3 +71,42 @@ http://localhost:3000
 | admin | Admin1234! | SuperAdmin |
 | auditor | Auditor1234! | Auditor |
 | registrador | Registrador1234! | Registrador |
+
+## End Points de Productos y Usuarios
+
+### Productos
+
+## Listar productos
+GET /api/productos
+## Ver producto por id
+GET /api/productos/:id
+## Crear producto
+POST /api/productos
+
+Body:
+
+{
+  "codigo": "P001",
+  "nombre": "Teclado Mecánico",
+  "descripcion": "Teclado mecánico RGB",
+  "cantidad": 10,
+  "precio": 25000
+}
+## Actualizar producto
+PUT /api/productos/:id
+
+## Eliminar producto
+DELETE /api/productos/:id
+
+### Usuarios
+
+## Listar usuarios
+GET /api/usuarios
+## Ver usuario por id
+GET /api/usuarios/:id
+## Crear usuario
+POST /api/usuarios
+## Actualizar usuario
+PUT /api/usuarios/:id
+## Eliminar usuario
+DELETE /api/usuarios/:id
