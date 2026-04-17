@@ -24,6 +24,75 @@ const limpiarFormulario = () => {
   cancelarEdicionBtn.classList.add('hidden');
 };
 
+const crearBoton = (texto, clase, dataset = {}) => {
+  const btn = document.createElement('button');
+  btn.textContent = texto;
+  btn.className = clase;
+
+  Object.entries(dataset).forEach(([key, value]) => {
+    btn.dataset[key] = value;
+  });
+
+  return btn;
+};
+
+const crearCelda = (texto) => {
+  const td = document.createElement('td');
+  td.textContent = texto ?? '';
+  return td;
+};
+
+const renderizarProductos = (productos) => {
+  tablaProductos.innerHTML = '';
+
+  if (productos.length === 0) {
+    const tr = document.createElement('tr');
+    const td = document.createElement('td');
+    td.colSpan = 7;
+    td.textContent = 'No hay productos registrados.';
+    tr.appendChild(td);
+    tablaProductos.appendChild(tr);
+    return;
+  }
+
+  productos.forEach((producto) => {
+    const tr = document.createElement('tr');
+
+    tr.appendChild(crearCelda(producto.id));
+    tr.appendChild(crearCelda(producto.codigo));
+    tr.appendChild(crearCelda(producto.nombre));
+    tr.appendChild(crearCelda(producto.descripcion || ''));
+    tr.appendChild(crearCelda(producto.cantidad));
+    tr.appendChild(crearCelda(producto.precio));
+
+    const tdAcciones = document.createElement('td');
+    const contenedor = document.createElement('div');
+    contenedor.className = 'table-actions';
+
+    const btnEditar = crearBoton('Editar', 'btn-edit', {
+      action: 'editar',
+      id: producto.id,
+      codigo: producto.codigo,
+      nombre: producto.nombre,
+      descripcion: producto.descripcion || '',
+      cantidad: producto.cantidad,
+      precio: producto.precio
+    });
+
+    const btnEliminar = crearBoton('Eliminar', 'btn-delete', {
+      action: 'eliminar',
+      id: producto.id
+    });
+
+    contenedor.appendChild(btnEditar);
+    contenedor.appendChild(btnEliminar);
+    tdAcciones.appendChild(contenedor);
+    tr.appendChild(tdAcciones);
+
+    tablaProductos.appendChild(tr);
+  });
+};
+
 const cargarProductos = async () => {
   try {
     const response = await fetch('/api/productos');
@@ -46,39 +115,8 @@ const cargarProductos = async () => {
       `;
       return;
     }
+    renderizarProductos(productos);
 
-    tablaProductos.innerHTML = productos.map(producto => `
-      <tr>
-        <td>${producto.id}</td>
-        <td>${producto.codigo}</td>
-        <td>${producto.nombre}</td>
-        <td>${producto.descripcion || ''}</td>
-        <td>${producto.cantidad}</td>
-        <td>${producto.precio}</td>
-        <td>
-          <div class="table-actions">
-            <button 
-              class="btn-edit"
-              data-action="editar"
-              data-id="${producto.id}"
-              data-codigo="${producto.codigo}"
-              data-nombre="${producto.nombre}"
-              data-descripcion="${producto.descripcion || ''}"
-              data-cantidad="${producto.cantidad}"
-              data-precio="${producto.precio}">
-              Editar
-            </button>
-
-            <button 
-              class="btn-delete"
-              data-action="eliminar"
-              data-id="${producto.id}">
-              Eliminar
-            </button>
-          </div>
-        </td>
-      </tr>
-    `).join('');
   } catch (error) {
     console.error(error);
     tablaProductos.innerHTML = `
