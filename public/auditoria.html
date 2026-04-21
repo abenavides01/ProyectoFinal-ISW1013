@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log de Auditoría</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <main class="dashboard-container">
+    <section class="dashboard-header">
+      <div>
+        <h1>Log de Auditoría</h1>
+        <p class="subtitle">Registro de eventos de seguridad - Solo SuperAdmin</p>
+      </div>
+      <div class="header-actions">
+        <a href="/dashboard.html" class="btn-secondary">Volver</a>
+        <button id="logoutBtn" class="btn-secondary">Cerrar sesión</button>
+      </div>
+    </section>
+
+    <article class="card">
+      <h2>Eventos registrados</h2>
+      <div class="table-container">
+        <table class="products-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Evento</th>
+              <th>Descripción</th>
+              <th>Usuario ID</th>
+              <th>Fecha</th>
+            </tr>
+          </thead>
+          <tbody id="tablaAuditoria">
+            <tr><td colspan="5">Cargando logs...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </article>
+  </main>
+
+  <script src="/js/auditoria.js"></script>
+</body>
+</html>

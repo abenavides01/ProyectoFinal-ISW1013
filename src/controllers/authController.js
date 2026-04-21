@@ -129,4 +129,8 @@ const logout = (req, res) => {
     return res.status(200).json({ mensaje: 'Sesión cerrada exitosamente.' });
 };
 
-module.exports = { registro, login, logout };
+const me = (req, res) => {
+  return res.status(200).json({ usuario: req.usuario });
+};
+
+module.exports = { registro, login, logout, me };

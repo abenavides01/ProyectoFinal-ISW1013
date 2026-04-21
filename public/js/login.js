@@ -31,7 +31,7 @@ loginForm.addEventListener('submit', async (event) => {
     mensaje.classList.add('success');
 
     setTimeout(() => {
-      window.location.href = '/productos.html';
+      window.location.href = '/dashboard.html';
     }, 1000);
   } catch (error) {
     console.error(error);

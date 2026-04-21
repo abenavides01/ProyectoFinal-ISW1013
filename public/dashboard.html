@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Proyecto Final ISW-1013</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <main class="dashboard-container">
+    <section class="dashboard-header">
+      <div>
+        <h1>Panel Principal</h1>
+        <p class="subtitle">Bienvenido, <span id="usernameDisplay"></span> — <span id="rolDisplay"></span></p>
+      </div>
+      <button id="logoutBtn" class="btn-secondary">Cerrar sesión</button>
+    </section>
+
+    <section class="nav-grid">
+      <article class="card nav-card" id="cardProductos">
+        <h2>Productos</h2>
+        <p>Gestión del inventario de productos.</p>
+        <a href="/productos.html" class="btn-primary">Ir a productos</a>
+      </article>
+
+      <article class="card nav-card" id="cardUsuarios">
+        <h2>Usuarios</h2>
+        <p>Administración de usuarios del sistema.</p>
+        <a href="/usuarios.html" class="btn-primary">Ir a usuarios</a>
+      </article>
+
+      <article class="card nav-card" id="cardAuditoria">
+        <h2>Auditoría</h2>
+        <p>Registro de eventos de seguridad del sistema.</p>
+        <a href="/auditoria.html" class="btn-primary">Ver logs</a>
+      </article>
+    </section>
+  </main>
+
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>
